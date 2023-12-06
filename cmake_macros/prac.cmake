@@ -48,7 +48,7 @@ macro(SETUP_APP projname chapter)
 
 	if(MSVC)
 		set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-		set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${FOLDER_NAME}/${PROJECT_NAME})
+		set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${FOLDER_NAME})
 	endif()
 endmacro()
 

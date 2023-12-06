@@ -1,6 +1,7 @@
 #if !defined(DEFINES_H)
 
 #include <stdint.h>
+#include <stdio.h>
 
 typedef int8_t b8;
 typedef int16_t b16;
@@ -22,6 +23,35 @@ typedef int64_t int64;
 
 typedef float f32;
 typedef double f64;
+
+
+#include "Console/Console.h"
+void LogUnformatted(const char *Message);
+
+void
+pause()
+{
+    LogUnformatted("Press Enter to continue...");
+    HANDLE Console = Console::GetInputConsole();
+    FlushConsoleInputBuffer(Console);
+    
+    if (Console != INVALID_HANDLE_VALUE)
+    {
+        
+        INPUT_RECORD Input;
+        DWORD BytesRead;
+        
+        while (1)
+        {
+            auto Result = ReadConsole(Console, &Input, sizeof(INPUT_RECORD),
+                                      &BytesRead, NULL);
+            if (Result)
+            {
+                break;
+            }
+        }
+    }
+}
 
 #define DEFINES_H
 #endif // DEFINES_H

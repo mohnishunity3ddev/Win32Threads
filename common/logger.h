@@ -21,8 +21,6 @@ enum LogType
     LogType_MaxCount
 };
 
-static HANDLE ConsoleHandle = NULL;
-
 void
 OutputDebugStringColor(LogType LogType, const char *message)
 {
@@ -74,33 +72,25 @@ OutputDebugStringColor(LogType LogType, const char *message)
 void
 OutputToConsole(LogType LogType, const char *Message)
 {
-    if(ConsoleHandle == NULL)
-    {
-        ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-        if (ConsoleHandle == NULL)
-        {
-            AllocConsole();
-            ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-        }
-    }
+    HANDLE OutputConsole = Console::GetOutputConsole();
     
     static u8 Levels[] = {64, 4, 6, 2, 1, 8, 8, 8};
     if(LogType != LogType::LogType_Normal)
     {
-        SetConsoleTextAttribute(ConsoleHandle, Levels[LogType]);
+        SetConsoleTextAttribute(OutputConsole, Levels[LogType]);
     }
     else
     {
         // Set the console text attribute to white text on a black background
         SetConsoleTextAttribute(
-            ConsoleHandle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+            OutputConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     }
     
     OutputDebugStringColor(LogType, Message);
     
     u64 Length = strlen(Message);
     LPDWORD NumberWritten = 0;
-    WriteConsoleA(ConsoleHandle, Message, (DWORD)Length, NumberWritten, 0);
+    WriteConsoleA(OutputConsole, Message, (DWORD)Length, NumberWritten, 0);
 }
 
 void
