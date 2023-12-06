@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22.0)
 
-project(Template_VSCode_Project CXX C)
+project(Win32Threads CXX C)
 
 set(EXTERN_LIB_PATH ${CMAKE_CURRENT_SOURCE_DIR}/external)
 
@@ -75,5 +75,3 @@ include_directories(common)
 # Include Common SharedUtils
 add_subdirectory(common)
 add_subdirectory(src/Chapter01/01_test_project)
-add_subdirectory(src/Chapter01/02_Second_test_project)
-add_subdirectory(src/Chapter01/03.Test_Another_Project)
