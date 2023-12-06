@@ -1,4 +1,4 @@
-#include "Console.h"
+#include "Win32Console.h"
 
 HANDLE Console::InputConsole = NULL;
 HANDLE Console::OutputConsole = NULL;

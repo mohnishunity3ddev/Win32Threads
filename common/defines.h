@@ -1,5 +1,6 @@
 #if !defined(DEFINES_H)
 
+#include "windows.h"
 #include <stdint.h>
 #include <stdio.h>
 
@@ -25,26 +26,24 @@ typedef float f32;
 typedef double f64;
 
 
-#include "Console/Console.h"
+#include "Console/Win32Console.h"
 void LogUnformatted(const char *Message);
 
 void
 pause()
 {
-    LogUnformatted("Press Enter to continue...");
+    LogUnformatted("Press Enter to continue...\n");
     HANDLE Console = Console::GetInputConsole();
     FlushConsoleInputBuffer(Console);
     
     if (Console != INVALID_HANDLE_VALUE)
     {
-        
         INPUT_RECORD Input;
         DWORD BytesRead;
         
         while (1)
         {
-            auto Result = ReadConsole(Console, &Input, sizeof(INPUT_RECORD),
-                                      &BytesRead, NULL);
+            auto Result = ReadConsole(Console, &Input, sizeof(INPUT_RECORD), &BytesRead, NULL);
             if (Result)
             {
                 break;
