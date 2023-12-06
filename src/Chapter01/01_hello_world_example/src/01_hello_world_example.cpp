@@ -6,11 +6,22 @@
 DWORD WINAPI
 ThreadFunction(LPVOID lpParameter)
 {
-    while(1)
+    i32 a = 0;
+    while(a < 10)
     {
         LogInfo("I am in thread %s with Id %u\n", (const char *)lpParameter,
                 GetCurrentThreadId());
+        
+        if (a == 3)
+        {
+            // IMPORTANT: NOTE: ExitThread(0) will force quit the thread.
+            LogUnformatted("Exiting Prematurely from thread!\n");
+            ExitThread(0);
+        }
+        
+        // NOTE: Sleep for 1000 miliseconds or 1 second.
         Sleep(1000);
+        a++;
     }
     return 0;
 }
@@ -67,9 +78,9 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // in the thread we have a never ending while loop.
     
     // pause();
-    // TFree(h1); // <- Wait for the thread to complete before anything after this in the main function.
+    TFree(h1); // <- Wait for the thread to complete before anything after this in the main function.
     Console::FreeConsoles();
-
+    
     // LogInfoUnformatted("Main Function Terminated\n");
     return 0;
 }
