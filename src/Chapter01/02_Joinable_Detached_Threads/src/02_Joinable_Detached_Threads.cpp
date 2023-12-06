@@ -34,7 +34,7 @@ ThreadProc(LPVOID lpParameter)
                 Info->InputNumber);
         Sleep(1000);
     }
-
+    
     Info->Result = Info->InputNumber*Info->InputNumber;
     ExitThread(0);
 }
@@ -58,7 +58,10 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     Thread1 = CreateThread(NULL, 0, ThreadProc, (void *)threadInfo1, 0, NULL);
     Thread2 = CreateThread(NULL, 0, ThreadProc, (void *)threadInfo2, 0, NULL);
     LogDebug("Created two threads inside the main function\n");
-
+    
+    // Waiting for thread to complete its execution before executing anything
+    // here in this function. The max time we want to wait before giving up
+    // waiting on this thread is infinite.
     WaitForSingleObject(Thread1, INFINITE);
     CloseHandle(Thread1);
     Thread1 = NULL;
@@ -72,7 +75,8 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     LogWarn("The Result of Thread %d for computing the square of %f is %f.\n",
             threadInfo2->ThreadID, threadInfo2->InputNumber,
             threadInfo2->Result);
-
+    
+    pause();
     FreeConsole();
     return 0;
 }
