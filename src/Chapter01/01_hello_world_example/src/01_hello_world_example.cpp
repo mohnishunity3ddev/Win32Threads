@@ -64,6 +64,14 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     TCreate(h1);
     
     // IMPORTANT: NOTE:
+    // This will terminate the main thread. But the thing is that the child
+    // threads will continue to execute. If this main thread naturally exits by
+    // returning 0, then all child threads will end even if they were executing.
+    // But exiting the main thread like this will not end any child threads like
+    // the one above to end.
+    ExitThread(0);
+    
+    // IMPORTANT: NOTE:
     // Race Condition on thread creation:
     // We do not know when this log instruction will be executed after the
     // thread creation above or the first instruction inside the thread will be
@@ -76,8 +84,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // h1 we created will stop executing. but if we WaitForh1 to complete in
     // this main function, the main function effectively will be paused. because
     // in the thread we have a never ending while loop.
-    
-    // pause();
+    pause();
     TFree(h1); // <- Wait for the thread to complete before anything after this in the main function.
     Console::FreeConsoles();
     
