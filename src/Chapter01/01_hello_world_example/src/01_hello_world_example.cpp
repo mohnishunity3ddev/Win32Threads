@@ -69,7 +69,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // returning 0, then all child threads will end even if they were executing.
     // But exiting the main thread like this will not end any child threads like
     // the one above to end.
-    ExitThread(0);
+    // ExitThread(0);
     
     // IMPORTANT: NOTE:
     // Race Condition on thread creation:

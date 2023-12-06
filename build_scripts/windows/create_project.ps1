@@ -43,7 +43,7 @@ if($null -ne $foundChapterDir) {
     }
     # Add content
     Add-Content -Path .\CMakeLists.txt -Value "cmake_minimum_required(VERSION 3.22.0)`n`nproject($projNameArg)`n`ninclude(../../../cmake_macros/prac.cmake)`n`nSETUP_APP($projNameArg `"Chapter$chapterNumber`")`n`nif(TARGET SharedUtils)`ntarget_link_libraries($projNameArg SharedUtils)`nendif()"
-    Add-Content -Path .\src\$projNameArg.cpp -Value "#include <windows.h>`n`n#include <defines.h>`n#include <Logger/win32Logger.h>`n`ni32`nwWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,`n          i32 CmdShow)`n{`n    LogInfoUnformatted(`"Hello, World!`");`n    FreeConsole();`n    return 0;`n}"
+    Add-Content -Path .\src\$projNameArg.cpp -Value "#include <windows.h>`n`n#include <defines.h>`n#include <Win32Logger.h>`n`ni32`nwWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,`n          i32 CmdShow)`n{`n    LogInfoUnformatted(`"Hello, World!`");`n    FreeConsole();`n    return 0;`n}"
     Add-Content -Path $PROJECT_ROOT_DIR_PATH\CMakeLists.txt -Value "`nadd_subdirectory(src/$foundChapterFolderName/$projNameArg)"
 } else {
     Write-Error "Could not find Chapter associated with given arg: $chapterNumberArg"
