@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) Launch ChapterWise Generic Debug",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}/../bin/Debug/${fileBasenameNoExtension}_Debug.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "(Windows) Launch ChapterWise Generic Release",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}/../bin/Release/${fileBasenameNoExtension}_Release.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal"
+        }
+
+    ]
+}
