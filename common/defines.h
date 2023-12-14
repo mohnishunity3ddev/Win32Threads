@@ -27,30 +27,32 @@ typedef double f64;
 
 
 #include "Console/Win32Console.h"
-void LogUnformatted(const char *Message);
+#include "Logger/Win32Logger.h"
 
-void
-pause()
-{
-    LogUnformatted("Press Enter to continue...\n");
-    HANDLE Console = Console::GetInputConsole();
-    FlushConsoleInputBuffer(Console);
-    
-    if (Console != INVALID_HANDLE_VALUE)
-    {
-        INPUT_RECORD Input;
-        DWORD BytesRead;
-        
-        while (1)
-        {
-            auto Result = ReadConsole(Console, &Input, sizeof(INPUT_RECORD), &BytesRead, NULL);
-            if (Result)
-            {
-                break;
-            }
-        }
+#define OFFSETOF(Type, Member) (size_t)&(((Type *)0)->Member)
+
+#define pause()                                                                \
+    {                                                                          \
+        Win32Logger::LogUnformatted("Press Enter to continue...\n");           \
+        HANDLE Console = Console::GetInputConsole();                           \
+        FlushConsoleInputBuffer(Console);                                      \
+                                                                               \
+        if (Console != INVALID_HANDLE_VALUE)                                   \
+        {                                                                      \
+            INPUT_RECORD Input;                                                \
+            DWORD BytesRead;                                                   \
+                                                                               \
+            while (1)                                                          \
+            {                                                                  \
+                auto Result = ReadConsole(                                     \
+                    Console, &Input, sizeof(INPUT_RECORD), &BytesRead, NULL);  \
+                if (Result)                                                    \
+                {                                                              \
+                    break;                                                     \
+                }                                                              \
+            }                                                                  \
+        }                                                                      \
     }
-}
 
 #define DEFINES_H
 #endif // DEFINES_H

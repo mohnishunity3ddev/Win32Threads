@@ -1,7 +1,7 @@
 #include <windows.h>
 
 #include <defines.h>
-#include <Win32Logger.h>
+#include <Logger/Win32Logger.h>
 
 DWORD WINAPI
 ThreadFunction(LPVOID lpParameter)
@@ -9,13 +9,13 @@ ThreadFunction(LPVOID lpParameter)
     i32 a = 0;
     while(a < 10)
     {
-        LogInfo("I am in thread %s with Id %u\n", (const char *)lpParameter,
+        Win32Logger::LogInfo("I am in thread %s with Id %u\n", (const char *)lpParameter,
                 GetCurrentThreadId());
         
         if (a == 3)
         {
             // IMPORTANT: NOTE: ExitThread(0) will force quit the thread.
-            LogUnformatted("Exiting Prematurely from thread!\n");
+            Win32Logger::LogUnformatted("Exiting Prematurely from thread!\n");
             ExitThread(0);
         }
         
@@ -53,7 +53,7 @@ CreateThread(thread_handle *Handle)
     
     if(Handle->handle == NULL)
     {
-        LogErrorUnformatted("Could not create the thread!");
+        Win32Logger::LogErrorUnformatted("Could not create the thread!");
     }
 }
 
@@ -77,7 +77,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // thread creation above or the first instruction inside the thread will be
     // executed. It depends on the CPU which thread is scheduled first and the
     // first instruction in that thread will be executed first.
-    LogInfoUnformatted("Hello, World From Main Function!\n");
+    Win32Logger::LogInfoUnformatted("Hello, World From Main Function!\n");
     
     // IMPORTANT: NOTE:
     // if we don't pause the main function, the main will go on, and the thread

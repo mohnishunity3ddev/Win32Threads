@@ -77,5 +77,5 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Include Common SharedUtils
 add_subdirectory(common)
 add_subdirectory(src/Chapter01/01_hello_world_example)
-
 add_subdirectory(src/Chapter01/02_Joinable_Detached_Threads)
+add_subdirectory(src/Chapter01/03_notification_chains)
