@@ -90,3 +90,5 @@ add_subdirectory(src/Chapter02_ThreadAPI/03a_locks_mutex)
 add_subdirectory(src/Chapter02_ThreadAPI/03b_locks_interlocked_ops)
 
 add_subdirectory(src/Chapter02_ThreadAPI/03c_locks_critical_section)
+
+add_subdirectory(src/Chapter02_ThreadAPI/04_conditional_variables)
