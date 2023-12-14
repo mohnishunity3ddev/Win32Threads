@@ -54,5 +54,35 @@ typedef double f64;
         }                                                                      \
     }
 
+struct thread_handle
+{
+    HANDLE handle;
+    DWORD id;
+    const char *message;
+};
+
+#define CREATE_THREAD(Handle, Func)                                            \
+    {                                                                          \
+        thread_handle *pHandle = &Handle;                                      \
+        pHandle->handle = CreateThread(                                        \
+            NULL, 0, Func, (void *)pHandle->message, 0, &pHandle->id);         \
+                                                                               \
+        if (pHandle->handle == NULL)                                           \
+        {                                                                      \
+            Win32Logger::LogErrorUnformatted("Could not create the thread!");  \
+        }                                                                      \
+    }
+
+#define TCreate(Handle, ThreadProc)                                            \
+    thread_handle Handle = {};                                                 \
+    {                                                                          \
+        Handle.message = #Handle;                                              \
+        CREATE_THREAD(Handle, ThreadProc);                                     \
+    }
+
+#define TFree(Thread)                                                          \
+    WaitForSingleObject(Thread.handle, INFINITE);                              \
+    CloseHandle(Thread.handle)
+
 #define DEFINES_H
 #endif // DEFINES_H

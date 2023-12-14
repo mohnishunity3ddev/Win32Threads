@@ -26,42 +26,11 @@ ThreadFunction(LPVOID lpParameter)
     return 0;
 }
 
-struct thread_handle
-{
-    HANDLE handle;
-    DWORD id;
-    const char *message;
-};
-
-#define TCreate(Name)                                                          \
-    thread_handle Name;                                                        \
-    const char *message = #Name;                                               \
-    {                                                                          \
-        Name.message = #Name;                                                  \
-        CreateThread(&Name);                                                   \
-    }
-
-#define TFree(Name)                                                            \
-    WaitForSingleObject(Name.handle, INFINITE);                                \
-    CloseHandle(Name.handle)
-
-void
-CreateThread(thread_handle *Handle)
-{
-    Handle->handle = CreateThread(NULL, 0, ThreadFunction,
-                                  (void *)Handle->message, 0, &Handle->id);
-    
-    if(Handle->handle == NULL)
-    {
-        Win32Logger::LogErrorUnformatted("Could not create the thread!");
-    }
-}
-
 i32
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
           i32 CmdShow)
 {
-    TCreate(h1);
+    TCreate(h1, ThreadFunction);
     
     // IMPORTANT: NOTE:
     // This will terminate the main thread. But the thing is that the child
@@ -85,7 +54,9 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // this main function, the main function effectively will be paused. because
     // in the thread we have a never ending while loop.
     pause();
-    TFree(h1); // <- Wait for the thread to complete before anything after this in the main function.
+    WaitForSingleObject(h1.handle, 0xFFFFFFFF);
+    CloseHandle(h1.handle); // <- Wait for the thread to complete before
+                            // anything after this in the main function.
     Console::FreeConsoles();
     
     // LogInfoUnformatted("Main Function Terminated\n");
