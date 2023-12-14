@@ -30,7 +30,7 @@ ThreadProc(LPVOID lpParameter)
     
     for(i32 i = 0; i < Info->InputNumber; ++i)
     {
-        Win32Logger::LogInfo("Thread %d is computing the square of %f\n",
+        Logger::LogInfo("Thread %d is computing the square of %f\n",
                              Info->ThreadID, Info->InputNumber);
         Sleep(500);
     }
@@ -57,7 +57,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     
     Thread1 = CreateThread(NULL, 0, ThreadProc, (void *)threadInfo1, 0, NULL);
     Thread2 = CreateThread(NULL, 0, ThreadProc, (void *)threadInfo2, 0, NULL);
-    Win32Logger::LogDebug("Created two threads inside the main function\n");
+    Logger::LogDebug("Created two threads inside the main function\n");
     
     // Waiting for thread to complete its execution before executing anything
     // here in this function. The max time we want to wait before giving up
@@ -65,14 +65,14 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     WaitForSingleObject(Thread1, INFINITE);
     CloseHandle(Thread1);
     Thread1 = NULL;
-    Win32Logger::LogWarn(
+    Logger::LogWarn(
         "The Result of Thread %d for computing the square of %f is %f.\n",
         threadInfo1->ThreadID, threadInfo1->InputNumber, threadInfo1->Result);
     
     WaitForSingleObject(Thread2, INFINITE);
     CloseHandle(Thread2);
     Thread2 = NULL;
-    Win32Logger::LogWarn(
+    Logger::LogWarn(
         "The Result of Thread %d for computing the square of %f is %f.\n",
         threadInfo2->ThreadID, threadInfo2->InputNumber, threadInfo2->Result);
     

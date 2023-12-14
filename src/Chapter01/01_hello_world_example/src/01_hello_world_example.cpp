@@ -9,13 +9,13 @@ ThreadFunction(LPVOID lpParameter)
     i32 a = 0;
     while(a < 10)
     {
-        Win32Logger::LogInfo("I am in thread %s with Id %u\n", (const char *)lpParameter,
+        Logger::LogInfo("I am in thread %s with Id %u\n", (const char *)lpParameter,
                 GetCurrentThreadId());
         
         if (a == 3)
         {
             // IMPORTANT: NOTE: ExitThread(0) will force quit the thread.
-            Win32Logger::LogUnformatted("Exiting Prematurely from thread!\n");
+            Logger::LogUnformatted("Exiting Prematurely from thread!\n");
             ExitThread(0);
         }
         
@@ -46,7 +46,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     // thread creation above or the first instruction inside the thread will be
     // executed. It depends on the CPU which thread is scheduled first and the
     // first instruction in that thread will be executed first.
-    Win32Logger::LogInfoUnformatted("Hello, World From Main Function!\n");
+    Logger::LogInfoUnformatted("Hello, World From Main Function!\n");
     
     // IMPORTANT: NOTE:
     // if we don't pause the main function, the main will go on, and the thread

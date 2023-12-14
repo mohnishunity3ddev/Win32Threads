@@ -19,7 +19,7 @@ enum LogType
     LogType_MaxCount
 };
 
-class Win32Logger
+class Logger
 {
   public:
     static void OutputDebugStringColor(LogType LogType, const char *message);

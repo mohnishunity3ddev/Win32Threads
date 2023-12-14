@@ -80,5 +80,8 @@ add_subdirectory(common)
 add_subdirectory(src/Chapter01/01_hello_world_example)
 add_subdirectory(src/Chapter01/02_Joinable_Detached_Threads)
 add_subdirectory(src/Chapter01/03_notification_chains)
-
 add_subdirectory(src/Chapter01/04_race_condition_problem)
+
+add_subdirectory(src/Chapter02_ThreadAPI/01_thread_creation)
+
+add_subdirectory(src/Chapter02_ThreadAPI/02_thread_completion)

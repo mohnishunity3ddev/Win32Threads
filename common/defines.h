@@ -33,7 +33,7 @@ typedef double f64;
 
 #define pause()                                                                \
     {                                                                          \
-        Win32Logger::LogUnformatted("Press Enter to continue...\n");           \
+        Logger::LogUnformatted("Press Enter to continue...\n");           \
         HANDLE Console = Console::GetInputConsole();                           \
         FlushConsoleInputBuffer(Console);                                      \
                                                                                \
@@ -58,25 +58,25 @@ struct thread_handle
 {
     HANDLE handle;
     DWORD id;
-    const char *message;
+    void *arg;
 };
 
 #define CREATE_THREAD(Handle, Func)                                            \
     {                                                                          \
         thread_handle *pHandle = &Handle;                                      \
         pHandle->handle = CreateThread(                                        \
-            NULL, 0, Func, (void *)pHandle->message, 0, &pHandle->id);         \
+            NULL, 0, Func, (void *)pHandle->arg, 0, &pHandle->id);         \
                                                                                \
         if (pHandle->handle == NULL)                                           \
         {                                                                      \
-            Win32Logger::LogErrorUnformatted("Could not create the thread!");  \
+            Logger::LogErrorUnformatted("Could not create the thread!");  \
         }                                                                      \
     }
 
 #define TCreate(Handle, ThreadProc)                                            \
     thread_handle Handle = {};                                                 \
     {                                                                          \
-        Handle.message = #Handle;                                              \
+        Handle.arg = (void *)#Handle;                                          \
         CREATE_THREAD(Handle, ThreadProc);                                     \
     }
 

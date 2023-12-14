@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 void
-Win32Logger::OutputDebugStringColor(LogType LogType, const char *message)
+Logger::OutputDebugStringColor(LogType LogType, const char *message)
 {
     static COLORREF Colors[] = {RGB(255, 0, 0),    RGB(0, 255, 0),
                                 RGB(0, 0, 255),    RGB(242, 188, 47),
@@ -60,7 +60,7 @@ Win32Logger::OutputDebugStringColor(LogType LogType, const char *message)
 }
 
 void
-Win32Logger::OutputToConsole(LogType LogType, const char *Message)
+Logger::OutputToConsole(LogType LogType, const char *Message)
 {
     HANDLE OutputConsole = Console::GetOutputConsole();
     
@@ -84,7 +84,7 @@ Win32Logger::OutputToConsole(LogType LogType, const char *Message)
 }
 
 void
-Win32Logger::Log_(LogType Type, const char *Format, va_list VarArgs)
+Logger::Log_(LogType Type, const char *Format, va_list VarArgs)
 {
     char Buffer[4096];
     
@@ -97,73 +97,73 @@ Win32Logger::Log_(LogType Type, const char *Format, va_list VarArgs)
 }
 
 void
-Win32Logger::LogInfo(const char *Format, ...)
+Logger::LogInfo(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Info, Format);
 }
 void
-Win32Logger::LogDebug(const char *Format, ...)
+Logger::LogDebug(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Debug, Format);
 }
 void
-Win32Logger::LogWarn(const char *Format, ...)
+Logger::LogWarn(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Warn, Format);
 }
 void
-Win32Logger::LogError(const char *Format, ...)
+Logger::LogError(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Error, Format);
 }
 void
-Win32Logger::LogFatal(const char *Format, ...)
+Logger::LogFatal(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Fatal, Format);
 }
 void
-Win32Logger::LogTrace(const char *Format, ...)
+Logger::LogTrace(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Trace, Format);
 }
 void
-Win32Logger::Log(const char *Format, ...)
+Logger::Log(const char *Format, ...)
 {
     LOG_FORMAT(LogType_Normal, Format);
 }
 
 void
-Win32Logger::LogInfoUnformatted(const char *Message)
+Logger::LogInfoUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Info, Message);
 }
 void
-Win32Logger::LogDebugUnformatted(const char *Message)
+Logger::LogDebugUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Debug, Message);
 }
 void
-Win32Logger::LogWarnUnformatted(const char *Message)
+Logger::LogWarnUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Warn, Message);
 }
 void
-Win32Logger::LogErrorUnformatted(const char *Message)
+Logger::LogErrorUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Error, Message);
 }
 void
-Win32Logger::LogFatalUnformatted(const char *Message)
+Logger::LogFatalUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Fatal, Message);
 }
 void
-Win32Logger::LogTraceUnformatted(const char *Message)
+Logger::LogTraceUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Trace, Message);
 }
 void
-Win32Logger::LogUnformatted(const char *Message)
+Logger::LogUnformatted(const char *Message)
 {
     OutputToConsole(LogType_Normal, Message);
 }
