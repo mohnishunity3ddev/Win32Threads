@@ -2,7 +2,6 @@
 
 #include "windows.h"
 #include <stdint.h>
-#include <stdio.h>
 
 typedef int8_t b8;
 typedef int16_t b16;
@@ -30,6 +29,18 @@ typedef double f64;
 #include "Logger/Win32Logger.h"
 
 #define OFFSETOF(Type, Member) (size_t)&(((Type *)0)->Member)
+
+#define ASSERT(Expression)                                                     \
+    if (!(Expression))                                                         \
+    {                                                                          \
+        *((int volatile *)0) = 0;                                              \
+    }
+#define INVALID_DEFAULT                                                        \
+    default:                                                                   \
+    {                                                                          \
+        ASSERT(!"Invalid Default Case");                                       \
+    }
+#define INVALID_CODEPATH ASSERT(!"Invalid Code Path")
 
 #define pause()                                                                \
     {                                                                          \

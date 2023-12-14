@@ -98,7 +98,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     DWORD pages = GetNumberOfPages(hProcess, lpAddress, 4096);
     
     // Print the number of pages
-    printf("Number of pages allocated: %d\n", pages);
+    // printf("Number of pages allocated: %d\n", pages);
     
     // Free the allocated memory
     VirtualFreeEx(hProcess, lpAddress, 4096, MEM_RELEASE);

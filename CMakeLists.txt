@@ -10,14 +10,13 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 # Definitions
 if(WIN32)
-    if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     add_definitions(-DWIN32_LEAN_AND_MEAN)
     add_definitions(-DNOMINMAX)
     add_definitions(-DWIN32)
     add_definitions(-DUNICODE -D_UNICODE)
 endif()
-endif()
+
 option(USE_DEBUG "Enter debug mode" OFF)
 if (USE_DEBUG)
   add_definitions(-DDEBUG)
@@ -85,3 +84,9 @@ add_subdirectory(src/Chapter01/04_race_condition_problem)
 add_subdirectory(src/Chapter02_ThreadAPI/01_thread_creation)
 
 add_subdirectory(src/Chapter02_ThreadAPI/02_thread_completion)
+
+add_subdirectory(src/Chapter02_ThreadAPI/03a_locks_mutex)
+
+add_subdirectory(src/Chapter02_ThreadAPI/03b_locks_interlocked_ops)
+
+add_subdirectory(src/Chapter02_ThreadAPI/03c_locks_critical_section)
