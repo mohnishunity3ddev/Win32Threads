@@ -1,8 +1,13 @@
 {
-    "editor.fontFamily": "'agave Nerd Font Mono r', 'Maple Mono NF', 'Source Code Pro', 'Google Sans Mono', 'JetBrainsMono Nerd Font Mono', 'CaskaydiaCove NF Mono', 'IosevkaTerm Nerd Font Mono'",
-    "editor.fontSize": 20,
+    "editor.fontFamily": "'Maple Mono NF','Google Sans Mono','Oxygen Mono Regular','JetBrainsMono Nerd Font Mono','CaskaydiaCove NF Mono','IosevkaTerm Nerd Font Mono', 'Source Code Pro','agave Nerd Font Mono r'",
+    "editor.fontSize": 17,
     "editor.fontLigatures": true,
     "editor.fontWeight": "normal",
+    "editor.fontVariations": true,
+    // "terminal.integrated.fontFamily": "'agave Nerd Font Mono r','Source Code Pro', 'JetBrainsMono Nerd Font Mono','Google Sans Mono','IosevkaTerm Nerd Font Mono','Maple Mono NF','Oxygen Mono Regular','DaddyTimeMono Nerd Font Mono Regular', 'EnvyCodeR Nerd Font Mono', 'Hurmit Nerd Font Mono'",
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontWeight": "normal",
+    // "terminal.integrated.fontWeightBold": "bold",
 
     "terminal.integrated.profiles.windows": {
         "Default Profile": {

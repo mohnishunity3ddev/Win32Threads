@@ -104,4 +104,8 @@ add_subdirectory(src/Chapter02_ThreadAPI/03b_locks_interlocked_ops)
 add_subdirectory(src/Chapter02_ThreadAPI/03c_locks_critical_section)
 add_subdirectory(src/Chapter02_ThreadAPI/04_conditional_variables)
 
-
+add_subdirectory(src/Chapter03_BuildingLocks/01_using_simple_flag)
+add_subdirectory(src/Chapter03_BuildingLocks/02_working_spin_locks_test_and_set)
+add_subdirectory(src/Chapter03_BuildingLocks/03_compare_and_swap)
+add_subdirectory(src/Chapter03_BuildingLocks/04_load_linked_store_conditional)
+add_subdirectory(src/Chapter03_BuildingLocks/05_ticket_turn_lock)

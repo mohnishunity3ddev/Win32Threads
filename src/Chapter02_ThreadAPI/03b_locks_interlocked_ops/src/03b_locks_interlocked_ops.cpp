@@ -5,7 +5,7 @@
 #include <String/sh_string.h>
 
 #define USE_SYNCHRONIZATION 1
-#define USE_INTERLOCKED_INCREMENT 1
+#define USE_INTERLOCKED_INCREMENT 0
 
 static volatile i32 Counter = 0;
 

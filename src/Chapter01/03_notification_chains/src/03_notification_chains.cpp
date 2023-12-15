@@ -15,7 +15,7 @@ senior_citizen(void *p1, void *p2)
 {
     person_t *person1 = (person_t *)p1;
     person_t *person2 = (person_t *)p2;
-    
+
     if (person1->age == person2->age)
         return 0;
     if (person1->age < person2->age)
@@ -65,26 +65,26 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     person[3].weight = 8;
     person[4].age = 9;
     person[4].weight = 10;
-    
+
     glthread_t base_glthread;
     init_glthread(&base_glthread);
-    
+
     glthread_priority_insert(&base_glthread, &person[4].glthread, senior_citizen, OFFSETOF(person_t, glthread));
     glthread_priority_insert(&base_glthread, &person[3].glthread, senior_citizen, OFFSETOF(person_t, glthread));
     glthread_priority_insert(&base_glthread, &person[2].glthread, senior_citizen, OFFSETOF(person_t, glthread));
     glthread_priority_insert(&base_glthread, &person[1].glthread, senior_citizen, OFFSETOF(person_t, glthread));
     glthread_priority_insert(&base_glthread, &person[0].glthread, senior_citizen, OFFSETOF(person_t, glthread));
-    
+
     glthread_t *curr = NULL;
     ITERATE_GLTHREAD_BEGIN(&base_glthread, curr)
     {
-        
+
         person_t *p = thread_to_person(curr);
         Win32Logger::LogInfo("Age = %d\n", p->age);
     }
     ITERATE_GLTHREAD_END(&base_glthread, curr);
     DWORD pages;
-    
+
     pause();
     FreeConsole();
     return 0;
@@ -93,16 +93,16 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine,
     HANDLE hProcess = GetCurrentProcess();
     LPVOID lpAddress =
         VirtualAllocEx(hProcess, NULL, 4096, MEM_COMMIT, PAGE_READWRITE);
-    
+
     // Get the number of pages allocated
     DWORD pages = GetNumberOfPages(hProcess, lpAddress, 4096);
-    
+
     // Print the number of pages
     // printf("Number of pages allocated: %d\n", pages);
-    
+
     // Free the allocated memory
     VirtualFreeEx(hProcess, lpAddress, 4096, MEM_RELEASE);
-    
+
     return 0;
 #endif
 }
