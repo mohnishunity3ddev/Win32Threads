@@ -1,6 +1,6 @@
 {
     "editor.fontFamily": "'Maple Mono NF','Google Sans Mono','Oxygen Mono Regular','JetBrainsMono Nerd Font Mono','CaskaydiaCove NF Mono','IosevkaTerm Nerd Font Mono', 'Source Code Pro','agave Nerd Font Mono r'",
-    "editor.fontSize": 17,
+    "editor.fontSize": 16,
     "editor.fontLigatures": true,
     "editor.fontWeight": "normal",
     "editor.fontVariations": true,

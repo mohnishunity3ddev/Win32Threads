@@ -109,3 +109,5 @@ add_subdirectory(src/Chapter03_BuildingLocks/02_working_spin_locks_test_and_set)
 add_subdirectory(src/Chapter03_BuildingLocks/03_compare_and_swap)
 add_subdirectory(src/Chapter03_BuildingLocks/04_load_linked_store_conditional)
 add_subdirectory(src/Chapter03_BuildingLocks/05_ticket_turn_lock)
+
+add_subdirectory(src/Chapter04_LockedDataStructures/01_thread_safe_counter_precise)
