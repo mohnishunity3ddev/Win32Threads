@@ -6,6 +6,8 @@ $arg2 = $args[1]
 if([bool]$arg -and (($arg -eq "ms") -or  ($arg -eq "msvc") )) {
     if([bool]$arg2 -and (($arg2 -eq "start") -or ($arg2 -eq "s") -or ($arg2 -eq "1") )) {
         Invoke-Expression "& msvc b start"
+    } elseif([bool]$arg2 -and (($arg2 -eq "rel") -or ($arg2 -eq "release"))){
+        Invoke-Expression "& msvc release"
     } else {
         Invoke-Expression "& msvc b"
     }

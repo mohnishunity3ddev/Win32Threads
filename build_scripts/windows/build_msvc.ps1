@@ -7,6 +7,7 @@
 
 Write-Alert "#####Configuring MSVC ..."
 $arg = $args[0]
+Write-Output "Arg is $arg"
 $build = 1
 # if([bool]$arg) {
 #     $build = 1
@@ -20,7 +21,12 @@ Invoke-Expression "& cmake -S '$PROJECT_ROOT_DIR_PATH' -B '$BIN_DIR_PATH'"
 if($?) {
     if($build -eq 1) {
         Write-Alert "#####Building All MSVC Projects ..."
-        Invoke-Expression "& MSBuild.exe '$BIN_DIR_PATH\$PROJECT_NAME.sln' "
+        if($arg -eq "b") {
+            Invoke-Expression "& MSBuild.exe '$BIN_DIR_PATH\$PROJECT_NAME.sln' "
+        }
+        else {
+            Invoke-Expression "& MSBuild.exe '$BIN_DIR_PATH\$PROJECT_NAME.sln' /p:Configuration=Release"
+        }
         
         if($?) {
             Write-Output "#####Build Successful."

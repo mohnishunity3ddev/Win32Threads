@@ -67,7 +67,7 @@ Set-Alias -Name rb -Value $PSScriptRoot\rebuild.ps1 -Scope Global
 Set-Alias -Name ms -Value $PSScriptRoot\build_msvc.ps1 -Scope Global
 Set-Alias -Name msvc -Value $PSScriptRoot\build_msvc.ps1 -Scope Global
 
-Set-Alias -Name build -Value $PSScriptRoot\build_msvc.ps1 -Scope Global
+Set-Alias -Name build -Value $PSScriptRoot\build_cmake.ps1 -Scope Global
 
 Set-Alias -Name cleanall -Value $PSScriptRoot\cleanbuild.ps1 -Scope Global
 Set-Alias -Name clean -Value $PSScriptRoot\cleanbuild.ps1 -Scope Global

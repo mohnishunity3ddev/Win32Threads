@@ -58,9 +58,9 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
                     Args->result.resultCode, Args->result.string);
 
     CloseHandle(T1.handle);
-    free(Args);
+    // free(Args);
     
-    // pause();
+    pause();
     FreeConsole();
     return 0;
 }

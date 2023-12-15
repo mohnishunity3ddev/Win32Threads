@@ -8,6 +8,12 @@ set(CMAKE_CXX_STANDARD 20) # this does nothing for MSVC, use target_compile_opti
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CLANG TRUE)
+else()
+    set(CLANG FALSE)
+endif()
+
 # Definitions
 if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
@@ -21,6 +27,16 @@ option(USE_DEBUG "Enter debug mode" OFF)
 if (USE_DEBUG)
   add_definitions(-DDEBUG)
 endif()
+
+# set(ANALYZE "ON" CACHE BOOL "Analyze Executables")
+# if(ANALYZE)
+#   if(MSVC)
+#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=address")
+#   elseif(CLANG)
+#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wthread-safety -g")
+#   endif()
+# endif()
+
 
 ###### Find OpenGL
 # find_package(OpenGL REQUIRED)
@@ -82,13 +98,10 @@ add_subdirectory(src/Chapter01/03_notification_chains)
 add_subdirectory(src/Chapter01/04_race_condition_problem)
 
 add_subdirectory(src/Chapter02_ThreadAPI/01_thread_creation)
-
 add_subdirectory(src/Chapter02_ThreadAPI/02_thread_completion)
-
 add_subdirectory(src/Chapter02_ThreadAPI/03a_locks_mutex)
-
 add_subdirectory(src/Chapter02_ThreadAPI/03b_locks_interlocked_ops)
-
 add_subdirectory(src/Chapter02_ThreadAPI/03c_locks_critical_section)
-
 add_subdirectory(src/Chapter02_ThreadAPI/04_conditional_variables)
+
+

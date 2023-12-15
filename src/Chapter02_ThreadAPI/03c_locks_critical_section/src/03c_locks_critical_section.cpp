@@ -14,7 +14,7 @@ ThreadProc(LPVOID Param)
 {
     const char *P = (const char *)Param;
     Logger::LogInfo("Began Thread %s\n", P);
-
+    
     for (i32 i = 0; i < 1e7; ++i)
     {
 #if USE_SYNCHRONIZATION
