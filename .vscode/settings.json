@@ -1,9 +1,9 @@
 {
-    "editor.fontFamily": "Maple Mono NF, Google Sans Mono",
-    "editor.fontSize": 17,
+    "editor.fontFamily": "'agave Nerd Font Mono r', 'Maple Mono NF', 'Source Code Pro', 'Google Sans Mono', 'JetBrainsMono Nerd Font Mono', 'CaskaydiaCove NF Mono', 'IosevkaTerm Nerd Font Mono'",
+    "editor.fontSize": 20,
     "editor.fontLigatures": true,
     "editor.fontWeight": "normal",
-    
+
     "terminal.integrated.profiles.windows": {
         "Default Profile": {
             "path": [
@@ -17,7 +17,10 @@
         }
     },
     "terminal.integrated.defaultProfile.windows": "Default Profile",
-   
+
+    "editor.trimAutoWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+
     "files.associations": {
         "chrono": "cpp",
         "system_error": "cpp",
