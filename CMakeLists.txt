@@ -112,3 +112,5 @@ add_subdirectory(src/Chapter03_BuildingLocks/05_ticket_turn_lock)
 
 add_subdirectory(src/Chapter04_LockedDataStructures/01_thread_safe_counter_precise)
 add_subdirectory(src/Chapter04_LockedDataStructures/02_thread_safe_counter_approx)
+
+add_subdirectory(src/Chapter04_LockedDataStructures/03_concurrent_linked_lists)
