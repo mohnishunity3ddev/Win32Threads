@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include "defines.h"
-#include "Thread/mutex.h"
+#include "Thread/thread_api.h"
 
 struct node
 {
@@ -42,7 +42,7 @@ class concurrent_queue
     node *head;
     node *tail;
     mutex headLock, tailLock;
-  
+
   public:
     concurrent_queue();
     ~concurrent_queue();

@@ -3,7 +3,7 @@
 #include <defines.h>
 #include <Logger/Win32Logger.h>
 #include <String/sh_string.h>
-#include <Thread/mutex.h>
+#include <Thread/thread_api.h>
 #include <Containers/containers.h>
 
 struct args

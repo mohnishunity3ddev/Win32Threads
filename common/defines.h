@@ -64,6 +64,12 @@ typedef double f64;
         }                                                                      \
     }
 
+#define DELETE_MOVE_COPY(className)                                            \
+    className(const className &other) = delete;                                \
+    className(className &&other) = delete;                                     \
+    className &operator=(const className &other) = delete;                     \
+    className &operator=(className &&other) = delete
+
 struct thread_handle
 {
     HANDLE handle;

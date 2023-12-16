@@ -4,7 +4,7 @@
 #include <String/sh_string.h>
 #include <defines.h>
 #include <memory>
-#include <Thread/mutex.h>
+#include <Thread/thread_api.h>
 
 static volatile i32 Counter = 0;
 #define NUMCPUS 6
