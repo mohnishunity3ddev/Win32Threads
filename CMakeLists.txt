@@ -114,3 +114,5 @@ add_subdirectory(src/Chapter04_LockedDataStructures/01_thread_safe_counter_preci
 add_subdirectory(src/Chapter04_LockedDataStructures/02_thread_safe_counter_approx)
 
 add_subdirectory(src/Chapter04_LockedDataStructures/03_concurrent_linked_lists)
+
+add_subdirectory(src/Chapter04_LockedDataStructures/04_concurrent_queues)

@@ -4,11 +4,11 @@
 #include <Logger/Win32Logger.h>
 #include <String/sh_string.h>
 #include <Thread/mutex.h>
-#include <Containers/thread_safe_list.h>
+#include <Containers/containers.h>
 
 struct args
 {
-    list *list;
+    concurrent_list *list;
     i32 count;
     b32 odd;
 };
@@ -38,7 +38,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
           i32 CmdShow)
 {
     Logger::LogInfoUnformatted("Inside main function!\n");
-    list list{};
+    concurrent_list list{};
 
     args arg0 = {.list = &list, .count = 1000, .odd = true};
     args arg1 = {.list = &list, .count = 1000, .odd = false};

@@ -1,8 +1,8 @@
-#include "thread_safe_list.h"
+#include "containers.h"
 #include <memory>
 
 void
-list::cleanup()
+concurrent_list::cleanup()
 {
     _mutex.lock();
     node *curr = head;
@@ -16,7 +16,7 @@ list::cleanup()
 }
 
 i32
-list::insert(i32 key)
+concurrent_list::insert(i32 key)
 {
     node *n = (node *)malloc(sizeof(node));
     if (n == nullptr)
@@ -36,7 +36,7 @@ list::insert(i32 key)
 }
 
 i32
-list::lookup(i32 key)
+concurrent_list::lookup(i32 key)
 {
     i32 result = -1;
 
@@ -57,7 +57,7 @@ list::lookup(i32 key)
 }
 
 i32
-list::del(i32 key)
+concurrent_list::del(i32 key)
 {
     i32 result = -1;
     _mutex.lock();
@@ -85,7 +85,7 @@ list::del(i32 key)
 }
 
 void
-list::print()
+concurrent_list::print()
 {
     _mutex.lock();
 
@@ -102,7 +102,7 @@ list::print()
 }
 
 i32
-list::list::getCount()
+concurrent_list::concurrent_list::getCount()
 {
     i32 result = 0;
 
@@ -116,4 +116,91 @@ list::list::getCount()
     _mutex.unlock();
 
     return result;
+}
+
+concurrent_queue::concurrent_queue() : headLock{}, tailLock{}
+{
+    node *temp = (node *)malloc(sizeof(node));
+    temp->next = nullptr;
+    head = tail = temp;
+}
+
+concurrent_queue::~concurrent_queue() { this->cleanup(); }
+
+void
+concurrent_queue::enqueue(i32 val)
+{
+
+    node *temp = (node *)malloc(sizeof(node));
+    ASSERT(temp != nullptr);
+    temp->key = val;
+    temp->next = nullptr;
+
+    tailLock.lock();
+
+    this->tail->next = temp;
+    this->tail = temp;
+
+    tailLock.unlock();
+}
+
+i32
+concurrent_queue::dequeue(i32 *val)
+{
+    headLock.lock();
+
+    node *tmp = this->head;
+    node *new_head = tmp->next;
+    if (new_head == nullptr)
+    {
+        headLock.unlock();
+        return -1; // queue is empty
+    }
+
+    *val = new_head->key;
+    this->head = new_head;
+    headLock.unlock();
+
+    free(tmp);
+    return 0; // success
+}
+
+i32
+concurrent_queue::count()
+{
+    i32 result = 0;
+    tailLock.lock();
+    headLock.lock();
+
+    node *curr = head->next;
+    while (curr != nullptr)
+    {
+        ++result;
+        curr = curr->next;
+    }
+
+    headLock.unlock();
+    tailLock.unlock();
+    return result;
+}
+
+void
+concurrent_queue::cleanup()
+{
+    this->tailLock.lock();
+    this->headLock.lock();
+
+    node *curr = this->head;
+    while (curr != nullptr)
+    {
+        node *tmp = curr;
+        curr = curr->next;
+        free(tmp);
+    }
+
+    this->head = nullptr;
+    this->tail = nullptr;
+
+    this->headLock.unlock();
+    this->tailLock.unlock();
 }
