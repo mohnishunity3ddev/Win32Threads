@@ -24,6 +24,12 @@ class counter
         : globalValue(0), updateFrequency(updateFreq), globalLock{},
           localValues{}, localLocks{}
     {
+        globalLock.init();
+
+        for(i32 i = 0; i < NUMCPUS; ++i)
+        {
+            localLocks[i].init();
+        }
     }
 
     ~counter() { cleanup(); }

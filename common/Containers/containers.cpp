@@ -120,6 +120,8 @@ concurrent_list::concurrent_list::getCount()
 
 concurrent_queue::concurrent_queue() : headLock{}, tailLock{}
 {
+    headLock.init();
+    tailLock.init();
     node *temp = (node *)malloc(sizeof(node));
     temp->next = nullptr;
     head = tail = temp;

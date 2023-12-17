@@ -17,23 +17,20 @@ class concurrent_list
     mutex _mutex;
 
    public:
-    concurrent_list() : _mutex{}, head(nullptr){}
-    ~concurrent_list()
-    {
-        cleanup();
-    }
+     concurrent_list() : _mutex{}, head(nullptr) { _mutex.init(); }
+     ~concurrent_list() { cleanup(); }
 
-    concurrent_list(const concurrent_list &other) = delete;
-    concurrent_list(concurrent_list &&other) = delete;
-    concurrent_list &operator=(const concurrent_list &other) = delete;
-    concurrent_list &operator=(concurrent_list &&other) = delete;
+     concurrent_list(const concurrent_list &other) = delete;
+     concurrent_list(concurrent_list &&other) = delete;
+     concurrent_list &operator=(const concurrent_list &other) = delete;
+     concurrent_list &operator=(concurrent_list &&other) = delete;
 
-    void cleanup();
-    i32 insert(i32 key);
-    i32 lookup(i32 key);
-    i32 del(i32 key);
-    void print();
-    i32 getCount();
+     void cleanup();
+     i32 insert(i32 key);
+     i32 lookup(i32 key);
+     i32 del(i32 key);
+     void print();
+     i32 getCount();
 };
 
 class concurrent_queue

@@ -1,11 +1,5 @@
 #include "thread_api.h"
 
-mutex::mutex()
-{
-    _handle = CreateMutex(NULL, FALSE, NULL);
-    ASSERT(_handle != NULL);
-}
-
 void
 mutex::cleanup()
 {
@@ -30,6 +24,13 @@ void
 mutex::unlock()
 {
     ReleaseMutex(this->_handle);
+}
+
+void
+mutex::init()
+{
+    _handle = CreateMutex(NULL, FALSE, NULL);
+    ASSERT(_handle != NULL);
 }
 
 // content of mutex.cpp goes here

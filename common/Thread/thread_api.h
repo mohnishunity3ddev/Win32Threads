@@ -30,10 +30,10 @@ class thread
 class mutex
 {
   private:
-    HANDLE _handle;
 
   public:
-    mutex();
+    HANDLE _handle;
+    mutex() : _handle(NULL) {}
     ~mutex();
 
     DELETE_MOVE_COPY(mutex);
@@ -41,6 +41,7 @@ class mutex
     void lock();
     void unlock();
     void cleanup();
+    void init();
 };
 
 #define THREAD_API_H

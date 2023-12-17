@@ -17,7 +17,7 @@ DWORD WINAPI
 thread_proc(LPVOID param)
 {
     args *arg = (args *)param;
-
+    
     for(i32 i = arg->count - 1; i >= 0 ; --i)
     {
         if(arg->odd)

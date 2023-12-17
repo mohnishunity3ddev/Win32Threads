@@ -112,9 +112,8 @@ add_subdirectory(src/Chapter03_BuildingLocks/05_ticket_turn_lock)
 
 add_subdirectory(src/Chapter04_LockedDataStructures/01_thread_safe_counter_precise)
 add_subdirectory(src/Chapter04_LockedDataStructures/02_thread_safe_counter_approx)
-
 add_subdirectory(src/Chapter04_LockedDataStructures/03_concurrent_linked_lists)
-
 add_subdirectory(src/Chapter04_LockedDataStructures/04_concurrent_queues)
 
 add_subdirectory(src/Chapter05_ConditionalVariables/01_parent_wait_child_spinlock)
+add_subdirectory(src/Chapter05_ConditionalVariables/02_simple_cond_var_demo)
