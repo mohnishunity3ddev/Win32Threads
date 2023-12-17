@@ -50,6 +50,7 @@ _THREAD_PROC(child)
     EnterCriticalSection(&criticalSection);
     childDone = true;
     Logger::LogInfoUnformatted("child end!\n");
+    // Signal the condition variable and wake all threads waiting on it.
     WakeConditionVariable(&condVar);
     LeaveCriticalSection(&criticalSection);
 
@@ -63,6 +64,7 @@ waitForChild()
     while (!childDone)
     {
         Logger::LogInfoUnformatted("main sleeping!\n");
+        // NOTE: Sleep the thread and wait on condVar to get signaled.
         SleepConditionVariableCS(&condVar, &criticalSection, INFINITE);
     }
     LeaveCriticalSection(&criticalSection);

@@ -36,3 +36,6 @@ if(NOT SRC_FILES STREQUAL "")
 
     # target_link_libraries(SharedUtils PUBLIC opengl32 glad)
 endif()
+
+# Link with Advapi32.lib for Random Number Generator using CryptGenRandom
+target_link_libraries(SharedUtils PRIVATE Advapi32.lib)

@@ -23,6 +23,11 @@ if(WIN32)
     add_definitions(-DUNICODE -D_UNICODE)
 endif()
 
+if(CLANG)
+# Remove the -Wdeprecated-volatile flag globally
+add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-Wno-deprecated-volatile>")
+endif()
+
 option(USE_DEBUG "Enter debug mode" OFF)
 if (USE_DEBUG)
   add_definitions(-DDEBUG)
@@ -117,3 +122,8 @@ add_subdirectory(src/Chapter04_LockedDataStructures/04_concurrent_queues)
 
 add_subdirectory(src/Chapter05_ConditionalVariables/01_parent_wait_child_spinlock)
 add_subdirectory(src/Chapter05_ConditionalVariables/02_simple_cond_var_demo)
+add_subdirectory(src/Chapter05_ConditionalVariables/03_consumer_producer_wrong)
+
+add_subdirectory(src/Chapter05_ConditionalVariables/04_consumer_producer_correct)
+
+add_subdirectory(src/Chapter05_ConditionalVariables/05_consumer_producer_general)
