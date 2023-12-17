@@ -7,9 +7,9 @@
 #include <Thread/thread_api.h>
 #include <Rand/random_win32.h>
 
-#define BUFFER_SIZE 128
-#define nProducers 3
-#define nConsumers 5
+#define BUFFER_SIZE 8192
+#define nProducers 4
+#define nConsumers 9
 
 volatile i32 buffer[BUFFER_SIZE];
 volatile i32 fillIndex = 0;
@@ -69,7 +69,9 @@ _THREAD_PROC(producerThreadProc)
 
         i32 value = rng.next();
         put(value);
-        Logger::LogInfo("producer %d filled up the buffer with value: %d\n", id, value);
+        Logger::LogInfo("producer %d filled up the buffer with value: %d; "
+                        "items available: %d.\n",
+                        id, value, count);
         WakeConditionVariable(&queueNotEmpty);
 
         LeaveCriticalSection(&lock);
@@ -85,7 +87,7 @@ _THREAD_PROC(consumerThreadProc)
     Logger::LogInfo("consumer %d began!\n", id);
     while (true)
     {
-        Sleep(rng.next() % 500);
+        Sleep(rng.next() % 100);
 
         EnterCriticalSection(&lock);
 
@@ -102,7 +104,8 @@ _THREAD_PROC(consumerThreadProc)
         }
 
         i32 consumedVal = get();
-        Logger::LogInfo("consumer %d consumed %d\n", id, consumedVal);
+        Logger::LogInfo("consumer %d consumed %d; items left: %d.\n", id,
+                        consumedVal, count);
 
         WakeConditionVariable(&queueNotFull);
         LeaveCriticalSection(&lock);
@@ -131,6 +134,9 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
         hProducers[i] = CreateThread(NULL, 0, producerThreadProc,
                                      (void *)&producerIds[i], 0, &tempId);
     }
+
+    Sleep(10000);
+
     i32 consumerIds[nConsumers];
     HANDLE hConsumers[nConsumers]{};
     for(i32 i = 0; i < nConsumers; ++i)
@@ -144,6 +150,11 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
     EnterCriticalSection(&lock);
     stopRequested = true;
     LeaveCriticalSection(&lock);
+
+    // NOTE: Broadcast and wake up all the threads waiting on these two
+    // conditions.
+    WakeAllConditionVariable(&queueNotEmpty);
+    WakeAllConditionVariable(&queueNotFull);
 
     WaitForMultipleObjects(nProducers, hProducers, TRUE, INFINITE);
     WaitForMultipleObjects(nConsumers, hConsumers, TRUE, INFINITE);
