@@ -159,6 +159,17 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
     WaitForMultipleObjects(nProducers, hProducers, TRUE, INFINITE);
     WaitForMultipleObjects(nConsumers, hConsumers, TRUE, INFINITE);
 
+    for (i32 i = 0; i < nProducers; ++i)
+    {
+        CloseHandle(hProducers[i]);
+        hProducers[i] = NULL;
+    }
+    for (i32 i = 0; i < nConsumers; ++i)
+    {
+        CloseHandle(hConsumers[i]);
+        hConsumers[i] = NULL;
+    }
+
     DeleteCriticalSection(&lock);
 
     pause();
