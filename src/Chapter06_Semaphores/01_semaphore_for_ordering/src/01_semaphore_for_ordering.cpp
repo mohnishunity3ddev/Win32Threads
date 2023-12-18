@@ -54,8 +54,8 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
     // decrement the value (to 0) and return from sem wait() without waiting,
     // also achieving the desired effect.
     DWORD result = WaitForSingleObject(hSemaphore, INFINITE);
-
     ASSERT(result == WAIT_OBJECT_0);
+
     Logger::LogInfoUnformatted("parent!\n");
 
     pause();

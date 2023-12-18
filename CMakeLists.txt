@@ -127,3 +127,4 @@ add_subdirectory(src/Chapter05_ConditionalVariables/04_consumer_producer_correct
 add_subdirectory(src/Chapter05_ConditionalVariables/05_consumer_producer_general)
 
 add_subdirectory(src/Chapter06_Semaphores/01_semaphore_for_ordering)
+add_subdirectory(src/Chapter06_Semaphores/02_producer_consumer)
