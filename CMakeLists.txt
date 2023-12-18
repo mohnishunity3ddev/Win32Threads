@@ -123,9 +123,7 @@ add_subdirectory(src/Chapter04_LockedDataStructures/04_concurrent_queues)
 add_subdirectory(src/Chapter05_ConditionalVariables/01_parent_wait_child_spinlock)
 add_subdirectory(src/Chapter05_ConditionalVariables/02_simple_cond_var_demo)
 add_subdirectory(src/Chapter05_ConditionalVariables/03_consumer_producer_wrong)
-
 add_subdirectory(src/Chapter05_ConditionalVariables/04_consumer_producer_correct)
-
 add_subdirectory(src/Chapter05_ConditionalVariables/05_consumer_producer_general)
 
-add_subdirectory(src/Chapter06_Semaphores/01_semaphore_as_locks)
+add_subdirectory(src/Chapter06_Semaphores/01_semaphore_for_ordering)
